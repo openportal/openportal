@@ -1,22 +1,40 @@
 require "bundler/capistrano"
+require "rvm/capistrano"
+#require "capistrano/ext/multistage"
+
+require "rvm/capistrano"
+
+set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
+set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
+
+before 'deploy:setup', 'rvm:install_rvm'  # install/update RVM
+before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
+# before 'deploy:setup', 'rvm:create_gemset' # only create gemset
+
 
 server "ec2-54-200-52-60.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 
 set :application, "openportal"
 set :user, "ubuntu"
-set :deploy_to, "/home/#{user}/apps/#{application}"
+set :deploy_to, "/home/ubuntu/apps/openportal"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
+set :scm_username, "ubuntu"
 set :scm, "git"
-set :repository,  "git@github.com:openportal/#{application}.git"
+set :repository,  "git@github.com:openportal/openportal.git"
 set :branch, "master"
+
+#set :stages, ["staging", "production"]
+#set :default_stage, "staging"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
+ssh_options[:keys] = ["/home/meowmixer/Desktop/meowmixerkey.pem"]
 
-after "deploy", "deploy:cleanup" # keep only the last 5 releases
+#after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
+=begin
 namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
@@ -26,8 +44,12 @@ namespace :deploy do
   end
 
   task :setup_config, roles: :app do
-    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    require 'debugger'
+    debugger
+    run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    #sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    run "#{sudo} ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    #sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
@@ -73,3 +95,4 @@ end
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+=end
