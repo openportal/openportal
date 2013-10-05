@@ -16,3 +16,5 @@
 /tmp
 Gemfile.lock
 *.swp
+
+/config/database.yml
