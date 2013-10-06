@@ -32,9 +32,9 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 ssh_options[:keys] = ["/home/meowmixer/Desktop/meowmixerkey.pem"]
 
-#after "deploy", "deploy:cleanup" # keep only the last 5 releases
+after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
-=begin
+#=begin
 namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
@@ -44,12 +44,12 @@ namespace :deploy do
   end
 
   task :setup_config, roles: :app do
-    require 'debugger'
-    debugger
-    run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    #sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    run "#{sudo} ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
-    #sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    #require 'debugger'
+    #debugger
+    #run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    #run "#{sudo} ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
@@ -95,4 +95,4 @@ end
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
-=end
+#=end
