@@ -12,7 +12,10 @@ before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
 # before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 
 
-server "ec2-54-200-52-60.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Production
+#server "ec2-54-200-52-60.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development
+server "ec2-54-200-13-182.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 
 set :application, "openportal"
 set :user, "ubuntu"
@@ -30,7 +33,10 @@ set :branch, "master"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
-ssh_options[:keys] = ["/home/meowmixer/Desktop/meowmixerkey.pem"]
+#Production
+#ssh_options[:keys] = ["/home/meowmixer/Desktop/meowmixerkey.pem"]
+#Development
+ssh_options[:keys] = ["/home/meowmixer/Desktop/meowmixerkey2.pem"]
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
@@ -49,6 +55,7 @@ namespace :deploy do
     #run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     sudo "ln -df #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     #run "#{sudo} ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    run "chmod +x #{current_path}/config/unicorn_init.sh"
     sudo "ln -df #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
@@ -57,19 +64,21 @@ namespace :deploy do
   after "deploy:setup", "deploy:setup_config"
 
   task :symlink_config, roles: :app do
+    #require 'debugger'
+    #debugger
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
-  desc "Make sure local git is in sync with remote."
-  task :check_revision, roles: :web do
-    unless 'git rev-parse HEAD' == 'git rev-parse origin/master'
-      puts "WARNING: HEAD is not the same as origin/master"
-      puts "Run 'git push' to sync changes."
-      exit
-    end
-  end
-  before "deploy", "deploy:check_revision"
+  #desc "Make sure local git is in sync with remote."
+  #task :check_revision, roles: :web do
+  #  unless 'git rev-parse HEAD' == 'git rev-parse origin/master'
+  #    puts "WARNING: HEAD is not the same as origin/master"
+  #    puts "Run 'git push' to sync changes."
+  #    exit
+  #  end
+  #end
+  #before "deploy", "deploy:check_revision"
 end
 
 
