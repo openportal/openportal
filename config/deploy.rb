@@ -15,7 +15,9 @@ before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
 #Production
 #server "ec2-54-200-52-60.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 #Development
-server "ec2-54-200-13-182.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#server "ec2-54-200-13-182.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development2
+server "ec2-54-200-130-225.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 
 set :application, "openportal"
 set :user, "ubuntu"
@@ -25,7 +27,7 @@ set :use_sudo, false
 
 set :scm_username, "ubuntu"
 set :scm, "git"
-set :repository,  "git@github.com:openportal/openportal.git"
+set :repository,  "https://github.com/openportal/openportal.git"
 set :branch, "master"
 
 #set :stages, ["staging", "production"]
@@ -49,19 +51,29 @@ namespace :deploy do
     end
   end
 
+  task :setup_config_before, roles: :app do
+    run "mkdir -p #{shared_path}/config"
+    run "cp #{shared_path}/cached-copy/config/database.yml #{shared_path}/config/database.yml"
+    run "cp #{shared_path}/cached-copy/config/nginx.conf #{shared_path}/config/nginx.conf"
+    puts "Now edit the config files in #{shared_path}."
+  end
+  before "deploy:setup_config", "deploy:setup_config_before"
+
   task :setup_config, roles: :app do
     #require 'debugger'
     #debugger
     #run "#{sudo} ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    sudo "ln -df #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    sudo "ln -df #{release_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     #run "#{sudo} ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
-    run "chmod +x #{current_path}/config/unicorn_init.sh"
-    sudo "ln -df #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    run "chmod +x #{release_path}/config/unicorn_init.sh"
+    sudo "ln -df #{release_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    sudo "/etc/init.d/nginx restart"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
   end
-  after "deploy:setup", "deploy:setup_config"
+  #after "deploy:setup", "deploy:setup_config"
+  before "deploy:symlink_config", "deploy:setup_config"
 
   task :symlink_config, roles: :app do
     #require 'debugger'
