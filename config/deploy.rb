@@ -17,7 +17,15 @@ before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
 #Development
 #server "ec2-54-200-13-182.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 #Development2
-server "ec2-54-200-130-225.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#server "ec2-54-200-130-225.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development3
+#server "ec2-54-200-128-222.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development4
+#server "ec2-54-200-146-83.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development5
+#server "ec2-54-200-40-4.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development6
+server "ec2-54-200-111-103.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 
 set :application, "openportal"
 set :user, "ubuntu"
@@ -50,6 +58,18 @@ namespace :deploy do
       run "/etc/init.d/unicorn_#{application} #{command}"
     end
   end
+
+  task :setup_environment, roles: :app do
+    sudo 'apt-get -y --force-yes install git-core'
+    run 'git clone https://github.com/openportal/setup_environment.git'
+    run 'bash setup_environment/ubuntu_setup.sh'
+    #run 'echo -e "sudo apt-get install git-core" >> setup.sh'
+    #run 'echo -e "git clone https://github.com/openportal/setup_environment.git" >> setup.sh'
+    #run 'echo -e "bash setup_environment/ubuntu_setup.sh" >> setup.sh'
+    #run 'echo -e "rm setup.sh" >> setup.sh'
+    run 'echo "To be able to run rvm, ruby and rails, please run this command: source ~/.rvm/scripts/rvm" >> README.md'
+  end
+  before "deploy:setup", "deploy:setup_environment"
 
   task :setup_config_before, roles: :app do
     run "mkdir -p #{shared_path}/config"
