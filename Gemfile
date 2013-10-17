@@ -45,8 +45,11 @@ group :test do
   gem 'factory_girl'
   gem 'capybara'
   gem 'guard-rspec'
+  gem 'guard-livereload'
   gem 'ruby-prof'
   gem 'guard-test'
+  gem 'guard-spring'
+  gem 'spring'
   #gem 'sqlite3'
 end
 

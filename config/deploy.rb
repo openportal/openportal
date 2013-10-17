@@ -15,7 +15,7 @@ before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
 #Production
 #server "ec2-54-200-52-60.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 #Development
-#server "ec2-54-200-13-182.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+server "ec2-54-200-13-182.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 #Development2
 #server "ec2-54-200-130-225.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 #Development3
@@ -25,7 +25,15 @@ before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
 #Development5
 #server "ec2-54-200-40-4.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 #Development6
-server "ec2-54-200-111-103.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#server "ec2-54-200-111-103.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development7
+#server "ec2-54-200-111-103.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development8
+#server "ec2-54-200-146-100.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development9
+#server "ec2-54-200-20-55.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
+#Development9
+#server "ec2-54-200-148-67.us-west-2.compute.amazonaws.com", :web, :app, :db, primary: true
 
 set :application, "openportal"
 set :user, "ubuntu"

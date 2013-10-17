@@ -87,6 +87,9 @@ GEM
     guard-rspec (3.1.0)
       guard (>= 1.8)
       rspec (~> 2.13)
+    guard-spring (0.0.4)
+      guard
+      spring
     guard-test (1.0.0)
       guard (>= 1.8)
       test-unit (~> 2.2)
@@ -190,6 +193,7 @@ GEM
       json (>= 1.1.3)
       rdoc (~> 3.10)
     slop (3.4.6)
+    spring (0.0.11)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -240,6 +244,7 @@ DEPENDENCIES
   figaro
   guard-livereload
   guard-rspec
+  guard-spring
   guard-test
   jbuilder (~> 1.2)
   jquery-rails
@@ -253,6 +258,7 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails (~> 4.0.0)
   sdoc
+  spring
   sqlite3
   therubyracer
   turbolinks
