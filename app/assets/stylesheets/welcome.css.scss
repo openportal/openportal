@@ -3,18 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .header-container {
+    width:102%;
     margin-top: -8px;
     margin-left: -8px;
-    width:102%;
     height: 75px;
-    background-color: green;
+    //background-color: green;
 }
 
 .header-anon {
     height: 75px;
     width: 950px;
     margin: 0px auto;
-    background-color: grey;
+    //background-color: grey;
 }
 
 .header-left-anon {
@@ -31,14 +31,14 @@
     float: left;
     width: 650px;
     height: 75px;
-    background-color: blue;
+    //background-color: blue;
 }
 
 .header-tab-list-container {
     float: right;
     margin-top: 15px;
     height: 35px;
-    background-color: white;
+    //background-color: white;
 }
 
 .header-tab-container {
@@ -59,18 +59,64 @@
 .header-login-container {
     margin: 15px;
     padding: 8px 14px;
-    background-color: white;
+    //background-color: white;
     -moz-border-radius: 5px;
     border-radius: 5px;
     font-weight: bold;
 }
 
-.under-header-separator {
+.separator {
     width: 102%;
-    height: 2px;
     margin-left: -8px;
+    height: 2px;
     background-color: black;
 }
+
+.under-header-main {
+    width: 102%;
+    margin-left: -8px;
+    height: 400px;
+    background-color: green;
+
+    .container {
+        margin: 0px auto;
+        height: 400px;
+        width: 950px;
+        background-color: blue;
+
+        .left-section {
+            background-color: grey;
+            float:left;
+            height:400px;
+            width: 70%;     
+        }
+        
+    }
+    .inside-section{
+        margin: 85px 25px;
+
+        .title {
+            font-size: 3.2em;
+        }
+        .description {
+            font-size: 1.3em;
+        }
+    }
+}
+
+//.under-header-main-container {
+//    margin: 0px auto;
+//    height: 400px;
+//    width: 950px;
+//    background-color: blue;
+//}
+
+//.under-header-main-left-container {
+//    background-color: grey;
+//    float:left;
+//    height:400px;
+//    width: 70%;
+//}
 
 a,
 a:hover,
