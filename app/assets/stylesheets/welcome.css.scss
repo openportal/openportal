@@ -1,3 +1,65 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.header-container {
+    margin-top: -8px;
+    margin-left: -8px;
+    width:102%;
+    height: 75px;
+    background-color: green;
+}
+
+.header-anon {
+    height: 75px;
+    width: 950px;
+    margin: 0px auto;
+    background-color: grey;
+}
+
+.header-left-anon {
+    float: left;
+}
+
+.header-logo {
+    margin: 28px;
+}
+
+.header-middle-anon {
+    float: left;
+    width: 650px;
+    height: 75px;
+    background-color: blue;
+}
+
+.header-tab-list-container {
+    float: right;
+    margin-top: 40px;
+    height: 35px;
+    background-color: white;
+}
+
+.header-tab-container {
+    margin: 0px 3px;
+    float: left;
+}
+
+.header-tab {
+    padding: 14px 7px 0px 7px;
+
+}
+
+.header-right-anon {
+    float: right;
+}
+
+.header-login-container {
+    
+}
+
+.under-header-separator {
+    width: 102%;
+    height: 2px;
+    margin-left: -8px;
+    background-color: black;
+}
