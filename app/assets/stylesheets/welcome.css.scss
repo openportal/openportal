@@ -22,7 +22,9 @@
 }
 
 .header-logo {
-    margin: 28px;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 14px;
 }
 
 .header-middle-anon {
@@ -34,7 +36,7 @@
 
 .header-tab-list-container {
     float: right;
-    margin-top: 40px;
+    margin-top: 15px;
     height: 35px;
     background-color: white;
 }
@@ -45,8 +47,9 @@
 }
 
 .header-tab {
-    padding: 14px 7px 0px 7px;
-
+    padding: 7px 7px 0px 7px;
+    font-size: .9em;
+    font-weight: bold;
 }
 
 .header-right-anon {
@@ -54,7 +57,12 @@
 }
 
 .header-login-container {
-    
+    margin: 15px;
+    padding: 8px 14px;
+    background-color: white;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
 .under-header-separator {
@@ -62,4 +70,12 @@
     height: 2px;
     margin-left: -8px;
     background-color: black;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: black;
 }
