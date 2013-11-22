@@ -12,7 +12,10 @@
   <% else %>
     <%= render "layouts/header_anon" %>
   <% end %>
-  <%= yield %>
-
+  <div class="under-header-main">
+    <div class="container">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

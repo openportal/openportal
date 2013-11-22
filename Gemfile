@@ -8,6 +8,8 @@ gem 'rvm-capistrano'
 gem 'sqlite3'
 #gem 'pg'
 
+gem 'omniauth'
+
 gem 'rest-client'
 gem 'figaro'
 
