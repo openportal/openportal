@@ -41,6 +41,9 @@
 
   .header-search {
     padding: 7px 7px 7px 7px;
+    input {
+      width: 200px;
+    }
     //background-color: blue;
   }
 
@@ -113,6 +116,7 @@
       .title {
           padding: 20px;
           font-size: 3em;
+          //background-color: green;
       }
       .description {
         margin: 0px auto;

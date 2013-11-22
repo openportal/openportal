@@ -1,13 +1,23 @@
-<h1>Log In</h1>
+<div class="login-container">
+  <h1>Log In</h1>
 
-<%= form_tag sessions_path do %>
-    <div class="field">
-        <%= label_tag :email %><br />
-        <%= text_field_tag :email, params[:email] %>
+  <%= form_tag sessions_path do %>
+      <div class="field">
+          <%= label_tag :email %><br />
+          <%= text_field_tag :email, params[:email] %>
+      </div>
+      <div class="field">
+          <%= label_tag :password %><br />
+          <%= password_field_tag :password %>
+      </div>
+      <div class="actions"><%= submit_tag "Log In" %></div>
+  <% end %>
+</div>
+<div class="signup-container">
+  <p>Don't have an account?</p>
+  <%= link_to signup_path do %>
+    <div class="signup-button">
+      Sign up Here!
     </div>
-    <div class="field">
-        <%= label_tag :password %><br />
-        <%= password_field_tag :password %>
-    </div>
-    <div class="actions"><%= submit_tag "Log In" %></div>
-<% end %>
+  <% end %>
+</div>
