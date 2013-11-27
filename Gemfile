@@ -18,7 +18,6 @@ gem 'acts-as-taggable-on'
 
 gem 'nokogiri'
 
-
 gem 'pygments.rb'
 gem 'redcarpet'
 
@@ -45,15 +44,17 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'rspec-rails', :group => [:test, :development]
 group :test do
-  gem 'factory_girl'
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'capybara'
+  gem 'sqlite3'
   gem 'guard-rspec'
   gem 'guard-livereload'
-  gem 'ruby-prof'
-  gem 'guard-test'
+  #gem 'ruby-prof'
+  #gem 'guard-test' This seems to cause errors with routing
   gem 'guard-spring'
   gem 'spring'
-  #gem 'sqlite3'
+  gem 'launchy'
+  gem 'faker'
 end
 
 group :development do

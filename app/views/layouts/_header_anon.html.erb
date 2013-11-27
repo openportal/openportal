@@ -21,13 +21,13 @@
                       </div>
                   </div>
                 </a>
-                <a href="#">
+                <%= link_to organizations_path do %>
                   <div class="header-tab-container">
                       <div class="header-tab">
-                          <%= link_to "Organizations", :controller => :organizations, :action => :index %>
+                          Organizations
                       </div>
                   </div>
-                </a>
+                <% end %>
                 <a href="#">
                   <div class="header-tab-container">
                       <div class="header-tab">
